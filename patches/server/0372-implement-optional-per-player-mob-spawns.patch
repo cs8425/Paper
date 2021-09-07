@@ -677,7 +677,7 @@ index 95e5660e6cb1afb5ebdb3dbbe59a07c879bddb4b..88145f04989c71a686aae1b486087ecd
                  });
              }
          }
-@@ -161,13 +172,31 @@ public final class NaturalSpawner {
+@@ -161,13 +172,35 @@ public final class NaturalSpawner {
                  continue;
              }
  
@@ -693,11 +693,15 @@ index 95e5660e6cb1afb5ebdb3dbbe59a07c879bddb4b..88145f04989c71a686aae1b486087ecd
 +                    minDiff = Math.min(limit - world.getChunkSource().chunkMap.getMobCountNear(entityplayer, enumcreaturetype), minDiff);
 +                }
 +                difference = (minDiff == Integer.MAX_VALUE) ? 0 : minDiff;
++            } else {
++                if (!info.canSpawnForCategory(enumcreaturetype, limit)) {
++                    continue;
++                }
 +            }
 +            // Paper end
 +
 +            // Paper start - per player mob spawning
-+            if ((spawnAnimals || !enumcreaturetype.isFriendly()) && (spawnMonsters || enumcreaturetype.isFriendly()) && (rareSpawn || !enumcreaturetype.isPersistent()) && info.canSpawnForCategory(enumcreaturetype, limit) && difference > 0) {
++            if ((spawnAnimals || !enumcreaturetype.isFriendly()) && (spawnMonsters || enumcreaturetype.isFriendly()) && (rareSpawn || !enumcreaturetype.isPersistent()) && difference > 0) {
                  // CraftBukkit end
                  Objects.requireNonNull(info);
                  NaturalSpawner.SpawnPredicate spawnercreature_c = info::canSpawn;
